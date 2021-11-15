@@ -9,21 +9,45 @@ const getFoos = async () => {
 
 const getFoo = async (id) => {
     const foo = await Foo.findByPk(id);
-    //Should a Not Found return else than 200 ?
     return foo;
 };
 
 const createFoo = async (body) => {
-    try {
-        // Parse correctly body values
-        const foo = await Foo.create(body);
-        return foo;
-    } catch (err) {
-        logger.error(err);
-    }
+    const foo = await Foo.create(body);
+    return foo;
 };
 
-// Update TODO
+const updateFoo = async (id, body) => {
+    if (id != body.id) {
+        throw new Error('Bad request');
+    }
+
+    const foo = await Foo.findByPk(id);
+
+    if (foo === null) {
+        throw new Error('Foo not found');
+    }
+
+    return await Foo.update(body, {
+        where: {
+            id: body.id,
+        },
+    });
+};
+
+const deleteFoo = async (id) => {
+    const foo = await Foo.findByPk(id);
+
+    if (foo === null) {
+        throw new Error('Foo not found');
+    }
+
+    return await Foo.destroy({
+        where: {
+            id: id,
+        },
+    });
+};
 
 // Delete TODO
 
@@ -31,4 +55,6 @@ module.exports = {
     getFoos,
     getFoo,
     createFoo,
+    updateFoo,
+    deleteFoo,
 };

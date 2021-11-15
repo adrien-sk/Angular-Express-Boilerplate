@@ -5,23 +5,23 @@ const router = express.Router();
 
 router
     .route('/')
-    .get((req, res) => {
-        fooController.getFoos(req, res);
+    .get((req, res, next) => {
+        fooController.getFoos(req, res, next);
     })
-    .post((req, res) => {
-        fooController.createFoo(req, res);
+    .post((req, res, next) => {
+        fooController.createFoo(req, res, next);
     });
 
 router
     .route('/:id')
-    .get((req, res) => {
-        fooController.getFoo(req, res);
+    .get((req, res, next) => {
+        fooController.getFoo(req, res, next);
     })
-    .patch((req, res) => {
-        fooController.updateFoo(req, res);
+    .patch((req, res, next) => {
+        fooController.updateFoo(req, res, next);
     })
-    .delete((req, res) => {
-        fooController.deleteFoo(req, res);
+    .delete((req, res, next) => {
+        fooController.deleteFoo(req, res, next);
     });
 
 module.exports = router;
