@@ -1,4 +1,4 @@
-# Flight Report App
+# AngularExpressBoilerplate
 
 ## Development server
 
